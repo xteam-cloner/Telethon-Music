@@ -37,7 +37,7 @@ class call_py:
 
 test_stream = 'http://docs.evostream.com/sample_content/assets/' \
               'sintel1m720p.mp4'
-call_py.play(
+call_py(
 chat.id,
     MediaStream(
         test_stream,
