@@ -5,6 +5,10 @@ from telethon.sessions import StringSession
 from telethon.network.connection.tcpabridged import ConnectionTcpAbridged
 import logging
 from pytgcalls import PyTgCalls
+from pytgcalls import compose
+from pytgcalls import PyTgCalls
+from pytgcalls.types import MediaStream
+
 from telethon.network.connection.tcpabridged import ConnectionTcpAbridged
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
@@ -19,7 +23,13 @@ bot = TelegramClient('Zaid', api_id=Config.API_ID, api_hash=Config.API_HASH)
 Zaid = bot.start(bot_token=Config.BOT_TOKEN)
 client = TelegramClient(StringSession(Config.STRING_SESSION), Config.API_ID, Config.API_HASH)
 client.start()
-call_py = PyTgCalls(client)
+
+call_py = TelegramClient(
+    'py-tgcalls',
+    api_id=Config.API_ID,
+    api_hash=Config.API_HASH,
+)
+
 test_stream = 'http://docs.evostream.com/sample_content/assets/' \
               'sintel1m720p.mp4'
 call_py.play(
