@@ -5,8 +5,8 @@ from telethon.sessions import StringSession
 from telethon.network.connection.tcpabridged import ConnectionTcpAbridged
 import logging
 from pytgcalls import PyTgCalls
-from pytgcalls import compose
-from pytgcalls import PyTgCalls
+#from pytgcalls import compose
+#from pytgcalls import PyTgCalls
 from pytgcalls.types import MediaStream
 
 from telethon.network.connection.tcpabridged import ConnectionTcpAbridged
