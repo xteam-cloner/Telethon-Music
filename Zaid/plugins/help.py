@@ -1,5 +1,5 @@
 from telethon import events, Button
-from Zaid import Zaid, BOT_USERNAME
+from Zaid import bot as Zaid, BOT_USERNAME
 from Config import Config
 
 
