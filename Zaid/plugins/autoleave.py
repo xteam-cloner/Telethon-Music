@@ -1,5 +1,5 @@
 import asyncio
-from Zaid import call_py, client
+from Zaid import call_py, bot
 from Config import Config
 from telethon.tl.functions.channels import LeaveChannelRequest
 
