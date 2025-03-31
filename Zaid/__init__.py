@@ -3,7 +3,7 @@ import logging
 
 from telethon import TelegramClient, events
 from telethon.sessions import StringSession
-from pytgcalls import PyTgCalls
+import pytgcalls
 
 from Config import Config
 
