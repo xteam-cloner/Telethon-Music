@@ -1,5 +1,5 @@
 from telethon import events, Button
-from Zaid import Zaid
+from Zaid import bot as Zaid
 from Zaid.status import *
 from Config import Config
 from telethon.tl.functions.channels import EditAdminRequest
