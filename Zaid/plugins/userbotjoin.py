@@ -14,7 +14,7 @@ from telethon.tl.functions.channels import LeaveChannelRequest
 from telethon.tl.functions.messages import ImportChatInviteRequest
 from Zaid import *
 from Zaid.status import *
-
+from Zaid import bot as Zaid
 
 
 @Zaid.on(events.NewMessage(pattern="^[!?/]join ?(.*)"))
