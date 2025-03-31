@@ -35,4 +35,4 @@ print("[INFO]: SUCCESSFULLY STARTED BOT!")
 print("[INFO]: VISIT @TheUpdatesChannel")
 
 if __name__ == "__main__":
-    Zaid.run_until_disconnected()
+    bot.run_until_disconnected()
