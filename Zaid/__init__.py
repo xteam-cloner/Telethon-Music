@@ -1,47 +1,65 @@
 import os
+import logging
 
 from telethon import TelegramClient, events
 from telethon.sessions import StringSession
-from telethon.network.connection.tcpabridged import ConnectionTcpAbridged
-import logging
 from pytgcalls import PyTgCalls
-#from pytgcalls import compose
-#from pytgcalls import PyTgCalls
-from pytgcalls.types import MediaStream
-
-from telethon.network.connection.tcpabridged import ConnectionTcpAbridged
-
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.INFO)
-
 
 from Config import Config
+
+logging.basicConfig(
+    format="[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s", level=logging.INFO
+)
+
 BOT_USERNAME = Config.BOT_USERNAME
 ASSISTANT_ID = Config.ASSISTANT_ID
 
-bot = TelegramClient('Zaid', api_id=Config.API_ID, api_hash=Config.API_HASH)
-Zaid = bot.start(bot_token=Config.BOT_TOKEN)
-client = TelegramClient(StringSession(Config.STRING_SESSION), Config.API_ID, Config.API_HASH)
-client.start()
-
-class call_py:
-    def __init__(self):
-        self.calls = []
-
-        for client in userbot.clients:
-            pycall = PyTgCalls(
-                client,
-                cache_duration=100,
-            )
-            self.calls.append(pycall)
-
-test_stream = 'http://docs.evostream.com/sample_content/assets/' \
-              'sintel1m720p.mp4'
-call_py(
-events.chats.id,
-    MediaStream(
-        test_stream,
-    ),
+# Bot Client
+bot = TelegramClient("Zaid", Config.API_ID, Config.API_HASH).start(
+    bot_token=Config.BOT_TOKEN
 )
-idle()
-call_py.start()
+
+# Assistant Client for PyTgCalls
+assistant = TelegramClient(
+    StringSession(Config.STRING_SESSION), Config.API_ID, Config.API_HASH
+)
+
+# PyTgCalls Client
+call_py = PyTgCalls(assistant)
+
+
+async def start_clients():
+    """Starts both the bot and assistant clients."""
+    try:
+        await assistant.start()
+        await call_py.start()
+        logging.info("Bot and Assistant clients started successfully.")
+    except Exception as e:
+        logging.error(f"Failed to start clients: {e}")
+        raise
+
+async def main():
+    """Main function to start clients and keep the bot running."""
+    try:
+        await start_clients()
+        # Add your bot's event handlers and logic here.
+        logging.info("Bot is running...")
+        await bot.run_until_disconnected()
+    except KeyboardInterrupt:
+        logging.info("Bot stopped by user.")
+    except Exception as e:
+        logging.error(f"An unexpected error occurred: {e}")
+    finally:
+        try:
+            await call_py.stop()
+            await assistant.disconnect()
+            await bot.disconnect()
+            logging.info("Clients disconnected.")
+        except Exception as e:
+            logging.error(f"Error during disconnection: {e}")
+
+
+if __name__ == "__main__":
+    import asyncio
+
+    asyncio.run(main())
