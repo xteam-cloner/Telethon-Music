@@ -3,7 +3,8 @@ import logging
 
 from telethon import TelegramClient, events
 from telethon.sessions import StringSession
-import pytgcalls
+from pytgcalls import idle
+from pytgcalls import PyTgCalls
 
 from Config import Config
 
@@ -36,30 +37,3 @@ async def start_clients():
         logging.info("Bot and Assistant clients started successfully.")
     except Exception as e:
         logging.error(f"Failed to start clients: {e}")
-        raise
-
-async def main():
-    """Main function to start clients and keep the bot running."""
-    try:
-        await start_clients()
-        # Add your bot's event handlers and logic here.
-        logging.info("Bot is running...")
-        await bot.run_until_disconnected()
-    except KeyboardInterrupt:
-        logging.info("Bot stopped by user.")
-    except Exception as e:
-        logging.error(f"An unexpected error occurred: {e}")
-    finally:
-        try:
-            await call_py.stop()
-            await assistant.disconnect()
-            await bot.disconnect()
-            logging.info("Clients disconnected.")
-        except Exception as e:
-            logging.error(f"Error during disconnection: {e}")
-
-
-if __name__ == "__main__":
-    import asyncio
-
-    asyncio.run(main())
