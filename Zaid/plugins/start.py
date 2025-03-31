@@ -1,4 +1,4 @@
-from Zaid import Zaid, BOT_USERNAME
+from Zaid import bot, BOT_USERNAME
 from Config import Config
 from telethon import events, Button
 
