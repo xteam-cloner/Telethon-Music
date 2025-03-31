@@ -1,7 +1,7 @@
 import os
 
 from telethon import Button, events
-from Zaid import Zaid
+from Zaid import bot as Zaid
 from Zaid.helpers.queues import get_active_chats
 
 
