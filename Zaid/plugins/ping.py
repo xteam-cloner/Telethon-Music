@@ -8,6 +8,7 @@ from datetime import datetime
 from telethon import Button, events
 
 from Zaid import *
+from Zaid import bot as Zaid
 
 START_TIME = datetime.utcnow()
 TIME_DURATION_UNITS = (
