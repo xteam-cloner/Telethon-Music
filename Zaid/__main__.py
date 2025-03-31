@@ -4,7 +4,7 @@ import glob
 from pathlib import Path
 from Zaid.utils import load_plugins
 import logging
-from Zaid import Zaid
+from Zaid import *
 from Zaid import client, ASSISTANT_ID
 from Zaid.plugins.autoleave import leave_from_inactive_call
 
