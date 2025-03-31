@@ -1,7 +1,7 @@
 from telethon import Button, events
 
 from Zaid import *
-
+from Zaid import bot as Zaid
 import asyncio
 import speedtest
 
